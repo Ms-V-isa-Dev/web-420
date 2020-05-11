@@ -1,3 +1,13 @@
+/*
+============================================
+; Title:  Exercise 2.3
+; Author: Professor Krasso
+; Date:   10 May 2020
+; Modified by: Verlee Washington
+; Description: Creating an api gateway
+;===========================================
+*/
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');

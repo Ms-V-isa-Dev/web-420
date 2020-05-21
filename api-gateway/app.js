@@ -36,7 +36,7 @@ app.use('/', indexRouter);
 app.use("/api", apiCatalog);
 
 // Database connection
-mongoose.connect('mongodb+srv://admin2:admin@buwebdev-cluster-1-qc6an.mongodb.net/test', {
+mongoose.connect('mongodb+srv://admin:Isatest@buwebdev-cluster-1-qc6an.mongodb.net/api-gateway', {
   promiseLibrary:require('bluebird')
   }).then(()=>console.log('connection successful'))
   .catch((err)=>console.error(err));

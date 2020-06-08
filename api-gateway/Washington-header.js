@@ -25,6 +25,6 @@ exports.display = function(firstName, lastName, assignment) {
 
 const header = require('./Washington-header.js');
 // Call the console.log() function to output a well-formatted header.
-console.log(header.display("Verlee", "Washington", "week-4"));
+console.log(header.display("Verlee", "Washington", "week-6"));
 console.log('\n');
 // End program

@@ -39,6 +39,22 @@ exports.user_register = function(request, response){
   });
 };
 
+exports.user_login = function(request, response) {
+
+  User.getOne(request.body.email, function(err, user) {
+    if (err) return response.status(500).send('Error on server.');
+    if (!user) return response.status(404).send('No user found.');
+
+    var passwordIsValid = bcrypt.compareSync(request.body.password, user.password);
+    if (!passwordIsValid) return response.status(401).send({ auth: false, token: null });
+
+    var token = jwt.sign({ id: user._id }, config.web.secret, {
+      expiresIn: 86400 // expires in 24 hours
+    });
+
+    response.status(200).send({ auth: true, token: token });
+  })
+};
 //Verify token on GET
 exports.user_token = function(request, response){
   var token = request.headers["x-access-token"];
@@ -56,6 +72,10 @@ exports.user_token = function(request, response){
       response.status(200).send(user);
     });
   });
+};
+
+exports.user_logout = function(request, response) {
+  response.status(200).send({ auth: false, token: null });
 };
 
 

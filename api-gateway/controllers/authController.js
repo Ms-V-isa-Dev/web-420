@@ -56,22 +56,14 @@ exports.user_login = function(request, response) {
   })
 };
 //Verify token on GET
-exports.user_token = function(request, response){
-  var token = request.headers["x-access-token"];
-
-  if (!token) return response.status(401).send({ auth: false, message: "No token provided"});
-
-  jwt.verify(token, config.web.secret, function(err, decoded) {
-    if (err) return response.status(500).send({ auth: false, message: "Failed to authenticate token."});
-
+exports.user_token = function(request, response) {
     User.getById(decoded.id, function(err, user) {
       if (err) return response.status(500).send("There was a problem finding the user.");
 
-      if (!user) return response.status(407).send("No user found");
+      if (!user) return response.status(404).send("No user found");
 
       response.status(200).send(user);
     });
-  });
 };
 
 exports.user_logout = function(request, response) {
